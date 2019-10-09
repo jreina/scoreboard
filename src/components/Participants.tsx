@@ -1,12 +1,18 @@
 import React, { Component } from "react";
 import { ParticipantManager } from "../managers/ParticipantManager";
 import ParticipantSummary from "./ParticipantSummary";
+import { ParticipantInfo } from "../models/ParticipantInfo";
 
-class Participants extends Component {
-  constructor(props) {
+interface ParticipantsState {
+  participants: Array<ParticipantInfo>;
+}
+
+class Participants extends Component<{}, ParticipantsState> {
+  private participantMgr: ParticipantManager;
+  constructor(props: {}) {
     super(props);
     this.participantMgr = new ParticipantManager();
-    this.state = { participants: null };
+    this.state = { participants: [] };
   }
   componentDidMount() {
     this.participantMgr
@@ -14,7 +20,7 @@ class Participants extends Component {
       .then(participants => this.setState({ participants }));
   }
   render = () =>
-    this.state.participants ? (
+    this.state.participants.length ? (
       this.state.participants.map(({ name, github, twitter }) => (
         <div>
           {name} {github} @{twitter}
@@ -22,8 +28,8 @@ class Participants extends Component {
         </div>
       ))
     ) : (
-      <div />
-    );
+        <div />
+      );
 }
 
 export default Participants;
