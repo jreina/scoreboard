@@ -1,5 +1,5 @@
 export interface ParticipantInfo {
-    name: string,
-    github: string,
-    twitter: string
+  name: string;
+  github: string;
+  twitter: string;
 }

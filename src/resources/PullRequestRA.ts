@@ -1,6 +1,6 @@
 import { GithubUserEvent } from "../models/GithubUserEvent";
 import { PullRequestPayload } from "../models/PullRequestPayload";
-import { conditionalFetch } from '../util/ConditionalFetch';
+import { conditionalFetch } from "../util/ConditionalFetch";
 
 class PullRequestRA {
   /**
@@ -14,7 +14,7 @@ class PullRequestRA {
       `https://api.github.com/users/${username}/events/public`
     );
 
-    const data = await response as Array<GithubUserEvent<PullRequestPayload>>;
+    const data = (await response) as Array<GithubUserEvent<PullRequestPayload>>;
 
     const pullRequests = data.filter(({ type }) => type === "PullRequestEvent");
     return pullRequests;

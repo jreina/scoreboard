@@ -10,7 +10,7 @@ export async function conditionalFetch<T>(uri: string): Promise<T> {
   const response = await fetch(uri, { headers });
   const status = response.status;
   if (status === 304) {
-      console.log('nothing changed')
+    console.log("nothing changed");
     return responseMap.get(uri) as T;
   }
   const data = response.json();

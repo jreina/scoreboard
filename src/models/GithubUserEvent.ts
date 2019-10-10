@@ -14,9 +14,7 @@ export interface GithubUserEvent<T> {
     name: string;
     url: string;
   };
-  payload: T
+  payload: T;
   public: boolean;
   created_at: string;
 }
-
-

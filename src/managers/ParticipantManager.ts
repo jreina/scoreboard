@@ -1,8 +1,10 @@
-import ParticipantRA from '../resources/ParticipantRA';
-import { ParticipantEngine } from '../engines/ParticipantEngine';
+import ParticipantRA from "../resources/ParticipantRA";
 
 export class ParticipantManager {
-    list() {
-        return ParticipantRA.list();
-    }
+  /**
+   * Fetch a list of participants from the jreina/scoreboard-participants repo on Github.
+   */
+  list() {
+    return ParticipantRA.list();
+  }
 }

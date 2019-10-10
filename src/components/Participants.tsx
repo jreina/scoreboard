@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { ParticipantManager } from "../managers/ParticipantManager";
-import ParticipantSummary from "./ParticipantSummary";
 import { ParticipantInfo } from "../models/ParticipantInfo";
+import ParticipantTable from "./ParticipantTable";
 
 interface ParticipantsState {
   participants: Array<ParticipantInfo>;
@@ -21,15 +21,10 @@ class Participants extends Component<{}, ParticipantsState> {
   }
   render = () =>
     this.state.participants.length ? (
-      this.state.participants.map(({ name, github, twitter }) => (
-        <div>
-          {name} {github} @{twitter}
-          <ParticipantSummary username={github} />
-        </div>
-      ))
+      <ParticipantTable participants={this.state.participants} />
     ) : (
-        <div />
-      );
+      <div />
+    );
 }
 
 export default Participants;
