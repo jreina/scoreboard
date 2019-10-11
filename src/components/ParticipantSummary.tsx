@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { PullRequestManager } from "../managers/PullRequestManager";
-import { GithubUserEvent } from "../models/GithubUserEvent";
-import { PullRequestPayload } from "../models/PullRequestPayload";
+import { GithubUserEvent } from "../../server/models/GithubUserEvent";
+import { PullRequestPayload } from "../../server/models/PullRequestPayload";
 
 class ParticipantSummary extends Component<
   { username: string },

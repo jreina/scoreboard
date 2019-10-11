@@ -1,6 +1,5 @@
-import { GithubUserEvent } from "../models/GithubUserEvent";
-import { PullRequestPayload } from "../models/PullRequestPayload";
-import { conditionalFetch } from "../util/ConditionalFetch";
+import { PullRequestPayload } from "../../server/models/PullRequestPayload";
+import { GithubUserEvent } from "../../server/models/GithubUserEvent";
 
 class PullRequestRA {
   /**
@@ -10,14 +9,12 @@ class PullRequestRA {
   async list(
     username: string
   ): Promise<Array<GithubUserEvent<PullRequestPayload>>> {
-    const response = await conditionalFetch(
-      `https://api.github.com/users/${username}/events/public`
-    );
+    const response = await fetch(`/api/pull-requests/list/${username}/`);
 
-    const data = (await response) as Array<GithubUserEvent<PullRequestPayload>>;
-
-    const pullRequests = data.filter(({ type }) => type === "PullRequestEvent");
-    return pullRequests;
+    const { prs } = (await response.json()) as {
+      prs: Array<GithubUserEvent<PullRequestPayload>>;
+    };
+    return prs;
   }
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ParticipantInfo } from "../models/ParticipantInfo";
+import { ParticipantInfo } from "../../server/models/ParticipantInfo";
 import GithubLink from "./GithubLink";
 import TwitterLink from "./TwitterLink";
 

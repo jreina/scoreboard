@@ -1,23 +1,19 @@
 import React, { Component } from "react";
-import { ParticipantManager } from "../managers/ParticipantManager";
-import { ParticipantInfo } from "../models/ParticipantInfo";
 import ParticipantTable from "./ParticipantTable";
+import { AppManager } from "../managers/AppManager";
+import { ParticipantSummary } from "../../server/models/ParticipantSummary";
 
 interface ParticipantsState {
-  participants: Array<ParticipantInfo>;
+  participants: Array<ParticipantSummary>;
 }
 
 class Participants extends Component<{}, ParticipantsState> {
-  private participantMgr: ParticipantManager;
   constructor(props: {}) {
     super(props);
-    this.participantMgr = new ParticipantManager();
     this.state = { participants: [] };
   }
   componentDidMount() {
-    this.participantMgr
-      .list()
-      .then(participants => this.setState({ participants }));
+    AppManager.participants.subscribe(participants => this.setState({ participants }))
   }
   render = () =>
     this.state.participants.length ? (

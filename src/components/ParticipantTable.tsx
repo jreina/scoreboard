@@ -1,13 +1,13 @@
 import React from "react";
-import { ParticipantInfo } from "../models/ParticipantInfo";
 import GithubLink from "./GithubLink";
 import TwitterLink from "./TwitterLink";
 import ParticipantProgressBar from "./ParticipantProgressBar";
+import { ParticipantSummary } from "../../server/models/ParticipantSummary";
 
 const ParticipantTable = ({
   participants
 }: {
-  participants: Array<ParticipantInfo>;
+  participants: Array<ParticipantSummary>;
 }) => (
   <table className="table table-sm table-hover">
     <thead>
@@ -18,7 +18,7 @@ const ParticipantTable = ({
       </tr>
     </thead>
     <tbody>
-      {participants.map(({ github, name, twitter }, idx) => (
+      {participants.map(({ github, name, twitter, prs }, idx) => (
         <tr key={idx}>
           <td>
             <GithubLink {...{ github, name }} />{" "}
@@ -26,7 +26,7 @@ const ParticipantTable = ({
           </td>
           <td>{name}</td>
           <td>
-            <ParticipantProgressBar username={github} />
+            <ParticipantProgressBar prs={prs} />
           </td>
         </tr>
       ))}

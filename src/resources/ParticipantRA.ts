@@ -1,11 +1,11 @@
-import { ParticipantInfo } from "../models/ParticipantInfo";
+import { ParticipantSummary } from "../../server/models/ParticipantSummary";
 
 class ParticipantRA {
-  async list(): Promise<Array<ParticipantInfo>> {
-    const { participants } = await fetch(
-      "https://raw.githubusercontent.com/jreina/scoreboard-participants/master/participants.json"
-    ).then(x => x.json());
-    return participants as Array<ParticipantInfo>;
+  async list(): Promise<Array<ParticipantSummary>> {
+    const { participants } = await fetch("/api/participants/list").then(x =>
+      x.json()
+    );
+    return participants as Array<ParticipantSummary>;
   }
 }
 
