@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import Participants from "./components/Participants";
+import GitHubForkRibbon from 'react-github-fork-ribbon';
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
           <Participants />
         </div>
       </div>
+      <GitHubForkRibbon href="//github.com/jreina/scoreboard" target="_blank" rel="noopener referrer">
+        Fork me on GitHub
+      </GitHubForkRibbon>
     </div>
   );
 }
