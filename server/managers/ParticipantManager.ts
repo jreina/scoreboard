@@ -1,7 +1,7 @@
 import ParticipantRA from "../resources/ParticipantRA";
-import PullRequestRA from "../resources/PullRequestRA";
 import _ from 'lodash';
 import { ParticipantSummary } from "../models/ParticipantSummary";
+import PullRequestEngine from "../engines/PullRequestEngine";
 
 export class ParticipantManager {
   /**
@@ -9,7 +9,7 @@ export class ParticipantManager {
    */
   async list(): Promise<Array<ParticipantSummary>> {
     const participants = await ParticipantRA.list();
-    const pullRequests = await Promise.all(participants.map(({ github }) => PullRequestRA.list(github)));
+    const pullRequests = await Promise.all(participants.map(({ github }) => PullRequestEngine.list(github)));
     const combined = _.zipWith(participants, pullRequests, (participantInfo, prs) => ({ ...participantInfo, prs }));
     return combined;
   }

@@ -1,7 +1,7 @@
 import { conditionalFetch } from "../util/ConditionalFetch";
 import { PullRequestPayload } from "../models/PullRequestPayload";
 import { GithubUserEvent } from "../models/GithubUserEvent";
-import moment from 'moment';
+import moment from "moment";
 
 class PullRequestRA {
   /**
@@ -9,17 +9,16 @@ class PullRequestRA {
    * @param username
    */
   async list(
-    username: string
+    username: string,
+    page: number = 1
   ): Promise<Array<GithubUserEvent<PullRequestPayload>>> {
-    const response = await conditionalFetch(
-      `https://api.github.com/users/${username}/events/public`
-    );
+    const uri = `https://api.github.com/users/${username}/events/public?page=${page}`;
+    const response = await conditionalFetch(uri);
 
-    const data = (await response) as Array<GithubUserEvent<PullRequestPayload>>;
+    const pullRequests = (await response) as Array<
+      GithubUserEvent<PullRequestPayload>
+    >;
 
-    const pullRequests = data.filter(({ type }) => type === "PullRequestEvent")
-      .filter(({ payload }) => payload.action === 'opened')
-      .filter(pr => moment(pr.created_at).month() === 9);
     return pullRequests;
   }
 }
