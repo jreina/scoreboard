@@ -7,6 +7,6 @@ export class AppManager {
   private static participantMgr: ParticipantManager = new ParticipantManager();
   public static participants: Observable<Array<ParticipantSummary>> = timer(
     0,
-    10000
+    60000
   ).pipe(concatMap(AppManager.participantMgr.list));
 }
